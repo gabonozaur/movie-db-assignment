@@ -1,12 +1,5 @@
-import Navigation from "../features/navigation";
+import Home from "../features/home";
 
-const HomePage = () => {
-  return (
-    <div>
-      <input placeholder="search" />
-      <Navigation />
-    </div>
-  );
-};
+const HomePage = () => <Home />;
 
 export default HomePage;

@@ -1,0 +1,28 @@
+img {
+  width: 100%;
+  border-radius: 16px;
+  min-height: 100%;
+  z-index: -1;
+}
+
+.container {
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  text-align: center;
+  font-size: 18px;
+  background-color: white;
+}
+
+.release {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  text-align: center;
+  font-size: 18px;
+  background-color: white;
+}
