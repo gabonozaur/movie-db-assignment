@@ -1,21 +1,12 @@
-import { useEffect } from "react";
+import LoadableWrapper from "../common/LoadableWrapper";
 import Movies from "../movies";
+import Navigation from "../navigation";
 import classNames from "./Home.module.scss";
 import useHome from "./useHome";
-import Navigation from "../navigation";
-import LoadableWrapper from "../common/LoadableWrapper";
 
 const Home = () => {
   const { data, fetching, input, setInput } = useHome();
 
-  useEffect(() => {
-    if (fetching) {
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [fetching]);
   return (
     <div>
       <input
@@ -26,7 +17,7 @@ const Home = () => {
         }}
       />
       <Navigation />
-      <LoadableWrapper>
+      <LoadableWrapper loading={fetching}>
         <Movies movies={data ?? []} />
       </LoadableWrapper>
     </div>

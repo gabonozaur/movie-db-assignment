@@ -1,10 +1,5 @@
-import Navigation from "../features/navigation";
+import Favorites from "../features/favorites";
 
-const FavoritesPage = () => (
-  <div>
-    <input />
-    <Navigation />
-  </div>
-);
+const FavoritesPage = () => <Favorites />;
 
 export default FavoritesPage;

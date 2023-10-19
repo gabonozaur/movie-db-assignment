@@ -11,7 +11,7 @@ const Navigation = () => {
       {pathname != MyRoutes.favorites ? (
         <Link to={MyRoutes.favorites}>Favorites</Link>
       ) : null}
-      {pathname != MyRoutes.favorites ? (
+      {pathname != MyRoutes.categories ? (
         <Link to={MyRoutes.categories}>Categories</Link>
       ) : null}
     </div>

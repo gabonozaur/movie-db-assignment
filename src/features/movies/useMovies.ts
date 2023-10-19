@@ -1,5 +1,6 @@
 import { useState } from "react";
 import apiClient from "../../utils/apiClient";
+import { accountId } from "../../utils/constants";
 
 const useMovies = () => {
   const [idChangingStatus, setIdChangingStatus] = useState(0);
@@ -10,7 +11,7 @@ const useMovies = () => {
     }
     setIdChangingStatus(id);
     try {
-      await apiClient.post("/account/20591884/favorite", {
+      await apiClient.post(`/account/${accountId}/favorite`, {
         media_type: "movie",
         media_id: id,
         favorite: newStatus,
