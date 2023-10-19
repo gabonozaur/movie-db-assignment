@@ -4,7 +4,7 @@ import Navigation from "../navigation";
 import useFavorites from "./useFavorites";
 
 const Favorites = () => {
-  const { data, fetching, onRefresh, onFetchMore, page, maxPage, didLoadMore } =
+  const { data, fetching, onRefresh, onFetchMore, page, maxPage } =
     useFavorites();
 
   return (
@@ -13,7 +13,7 @@ const Favorites = () => {
       <LoadableWrapper loading={fetching}>
         <Movies
           movies={data ?? []}
-          hideGetMore={page == maxPage || fetching || didLoadMore}
+          hideGetMore={page == maxPage}
           removeFromFavorites
           onChangeFavorite={onRefresh}
           onFetchMore={onFetchMore}

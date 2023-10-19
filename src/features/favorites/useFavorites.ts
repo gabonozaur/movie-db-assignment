@@ -8,7 +8,6 @@ const useFavorites = () => {
   const [fetching, setFetching] = useState(true);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
-  const [didLoadMore, setDidLoadMore] = useState(false);
 
   const fetchData = async (
     onSuccess: (values: MovieDTO[]) => void,
@@ -29,9 +28,7 @@ const useFavorites = () => {
       );
       onSuccess(res.data.results);
       setPage(selectedPage);
-      setTimeout(() => {
-        setMaxPage(res.data.total_pages);
-      }, 200);
+      setMaxPage(res.data.total_pages);
       setFetching(false);
     } catch (e: any) {}
     setFetching(false);
@@ -41,7 +38,6 @@ const useFavorites = () => {
     if (fetching) {
       return;
     }
-    setDidLoadMore(true);
     fetchData((values) => {
       setData([...data, ...values]);
     }, page + 1);
@@ -57,14 +53,6 @@ const useFavorites = () => {
     onRefresh();
   }, []);
 
-  useEffect(() => {
-    if (didLoadMore) {
-      setTimeout(() => {
-        setDidLoadMore(false);
-      }, 200);
-    }
-  }, [didLoadMore]);
-
   return {
     data,
     fetching,
@@ -73,7 +61,6 @@ const useFavorites = () => {
     onFetchMore,
     maxPage,
     page,
-    didLoadMore,
   };
 };
 

@@ -14,7 +14,6 @@ const useHome = () => {
   const [categories, setCategories] = useState<NameWithId[]>([]);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
-  const [didLoadMore, setDidLoadMore] = useState(false);
   const [selectedCategories, setSelectedCategories] =
     useState<SelectedCategories>({});
 
@@ -59,9 +58,7 @@ const useHome = () => {
       );
       onSuccess(res.data.results);
       setPage(selectedPage);
-      setTimeout(() => {
-        setMaxPage(res.data.total_pages);
-      }, 700);
+      setMaxPage(res.data.total_pages);
       setFetching(false);
     } catch (e: any) {
       if (e.message !== abortReason) {
@@ -81,7 +78,6 @@ const useHome = () => {
       return;
     }
 
-    setDidLoadMore(true);
     fetchData((values) => {
       setData([...data, ...values]);
     }, page + 1);
@@ -104,13 +100,6 @@ const useHome = () => {
     fetchCategories();
   }, []);
 
-  useEffect(() => {
-    if (didLoadMore) {
-      setTimeout(() => {
-        setDidLoadMore(false);
-      }, 200);
-    }
-  }, [didLoadMore]);
   return {
     data,
     fetching,
@@ -123,7 +112,6 @@ const useHome = () => {
     onFetchMore,
     maxPage,
     page,
-    didLoadMore,
   };
 };
 

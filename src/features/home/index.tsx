@@ -17,7 +17,6 @@ const Home = () => {
     onFetchMore,
     page,
     maxPage,
-    didLoadMore,
   } = useHome();
 
   return (
@@ -39,7 +38,7 @@ const Home = () => {
       <Navigation />
       <LoadableWrapper loading={fetching}>
         <Movies
-          hideGetMore={page == maxPage || didLoadMore || fetching}
+          hideGetMore={page == maxPage}
           onFetchMore={onFetchMore}
           movies={data ?? []}
         />
