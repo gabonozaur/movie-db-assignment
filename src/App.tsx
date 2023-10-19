@@ -3,6 +3,10 @@ import HomePage from "./pages";
 import CategoriesPage from "./pages/Categories";
 import FavoritesPage from "./pages/Favorites";
 import { MyRoutes } from "./types";
+import {
+  ErrorHandler,
+  ErrorHandlerProvider,
+} from "./features/common/errorHandler";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +18,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorHandlerProvider>
+      <RouterProvider router={router} />
+      <ErrorHandler />
+    </ErrorHandlerProvider>
+  );
 }
 
 export default App;

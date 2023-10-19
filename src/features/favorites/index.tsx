@@ -1,4 +1,4 @@
-import LoadableWrapper from "../common/LoadableWrapperr";
+import LoadableWrapper from "../common/loadableWrapper";
 import Movies from "../movies";
 import Navigation from "../navigation";
 import useFavorites from "./useFavorites";

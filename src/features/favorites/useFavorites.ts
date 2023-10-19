@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import apiClient from "../../utils/apiClient";
 import { accountId } from "../../utils/constants";
 import { MovieDTO } from "../movies/types";
+import { ErrorHandlerContext } from "../common/errorHandler";
 
 const useFavorites = () => {
   const [data, setData] = useState<MovieDTO[]>([]);
   const [fetching, setFetching] = useState(true);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+  const { handleReqError } = useContext(ErrorHandlerContext);
 
   const fetchData = async (
     onSuccess: (values: MovieDTO[]) => void,
@@ -30,7 +32,9 @@ const useFavorites = () => {
       setPage(selectedPage);
       setMaxPage(res.data.total_pages);
       setFetching(false);
-    } catch (e: any) {}
+    } catch (e: any) {
+      handleReqError(e);
+    }
     setFetching(false);
   };
 

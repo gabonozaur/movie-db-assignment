@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import apiClient from "../../utils/apiClient";
 import { MovieDTO } from "../movies/types";
 import { NameWithId } from "../../types";
 import { SelectedCategories } from "./types";
+import { ErrorHandlerContext } from "../common/errorHandler";
 
 const abortReason = "aborted";
 
@@ -16,6 +17,7 @@ const useHome = () => {
   const [maxPage, setMaxPage] = useState(1);
   const [selectedCategories, setSelectedCategories] =
     useState<SelectedCategories>({});
+  const { handleReqError } = useContext(ErrorHandlerContext);
 
   const generateParams = (selectedPage: number) => {
     let genreInput = "";
@@ -62,6 +64,7 @@ const useHome = () => {
       setFetching(false);
     } catch (e: any) {
       if (e.message !== abortReason) {
+        handleReqError(e);
         setFetching(false);
       }
     }
@@ -70,7 +73,9 @@ const useHome = () => {
     try {
       const res = await apiClient.get("/genre/movie/list");
       setCategories(res.data.genres);
-    } catch (e) {}
+    } catch (e) {
+      handleReqError(e);
+    }
   };
 
   const onFetchMore = () => {

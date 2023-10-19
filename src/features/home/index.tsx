@@ -1,4 +1,4 @@
-import LoadableWrapper from "../common/LoadableWrapperr";
+import LoadableWrapper from "../common/loadableWrapper";
 import Movies from "../movies";
 import Navigation from "../navigation";
 import Filter from "./Filter";
@@ -24,11 +24,19 @@ const Home = () => {
       <div className={classNames.flexContainer}>
         <input
           className={classNames.input}
-          defaultValue={input}
+          value={input}
           onChange={(e) => {
             setInput(e.target.value);
           }}
         />
+        <button
+          onClick={() => {
+            setInput("");
+          }}
+          disabled={!input}
+        >
+          clear
+        </button>
         <Filter
           categories={categories}
           selectedCategories={selectedCategories}
