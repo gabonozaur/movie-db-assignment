@@ -14,17 +14,11 @@ const useHome = () => {
   const [categories, setCategories] = useState<NameWithId[]>([]);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+  const [didLoadMore, setDidLoadMore] = useState(false);
   const [selectedCategories, setSelectedCategories] =
     useState<SelectedCategories>({});
 
-  const fetchData = async (
-    onSuccess: (values: MovieDTO[]) => void,
-    selectedPage: number = 1
-  ) => {
-    setFetching(true);
-    requestRef.current?.abort(abortReason);
-    requestRef.current = new AbortController();
-
+  const generateParams = (selectedPage: number) => {
     let genreInput = "";
 
     for (let index in selectedCategories) {
@@ -44,16 +38,30 @@ const useHome = () => {
       params.append("page", selectedPage + "");
     }
 
+    return params.toString();
+  };
+
+  const fetchData = async (
+    onSuccess: (values: MovieDTO[]) => void,
+    selectedPage: number = 1
+  ) => {
+    setFetching(true);
+    requestRef.current?.abort(abortReason);
+    requestRef.current = new AbortController();
+
     try {
       const res = await apiClient.get(
-        `/${input ? "search" : "discover"}/movie?` + params.toString(),
+        `/${input ? "search" : "discover"}/movie?` +
+          generateParams(selectedPage),
         {
           signal: requestRef.current.signal,
         }
       );
       onSuccess(res.data.results);
       setPage(selectedPage);
-      setMaxPage(res.data.total_pages);
+      setTimeout(() => {
+        setMaxPage(res.data.total_pages);
+      }, 700);
       setFetching(false);
     } catch (e: any) {
       if (e.message !== abortReason) {
@@ -73,6 +81,7 @@ const useHome = () => {
       return;
     }
 
+    setDidLoadMore(true);
     fetchData((values) => {
       setData([...data, ...values]);
     }, page + 1);
@@ -95,6 +104,13 @@ const useHome = () => {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    if (didLoadMore) {
+      setTimeout(() => {
+        setDidLoadMore(false);
+      }, 200);
+    }
+  }, [didLoadMore]);
   return {
     data,
     fetching,
@@ -107,6 +123,7 @@ const useHome = () => {
     onFetchMore,
     maxPage,
     page,
+    didLoadMore,
   };
 };
 

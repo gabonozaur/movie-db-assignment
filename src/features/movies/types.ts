@@ -18,7 +18,7 @@ export interface MovieDTO {
 export interface MoviesProps {
   movies: MovieDTO[];
   removeFromFavorites?: boolean;
-  onChangeFavorite?: () => {};
+  onChangeFavorite?: () => void;
   hideGetMore?: boolean;
   onFetchMore?: () => void;
 }

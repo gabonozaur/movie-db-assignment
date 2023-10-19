@@ -6,7 +6,7 @@ import useMovies from "./useMovies";
 
 const Movies: FC<MoviesProps> = (props) => {
   const { changeStatus, idChangingStatus, ref } = useMovies(props);
-  const { movies, hideGetMore } = props;
+  const { movies } = props;
   return (
     <>
       <div className={classNames.container}>
@@ -30,7 +30,7 @@ const Movies: FC<MoviesProps> = (props) => {
           <>No movies to show</>
         )}
       </div>
-      {!hideGetMore && movies?.length ? (
+      {!props.hideGetMore && movies?.length ? (
         <div ref={ref} className={classNames.loaderBar}>
           we getting more
         </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useInView } from "react-intersection-observer";
 import apiClient from "../../utils/apiClient";
 import { accountId } from "../../utils/constants";
 import { MoviesProps } from "./types";
-import { useInView } from "react-intersection-observer";
 
 const useMovies = (props: MoviesProps) => {
   const [idChangingStatus, setIdChangingStatus] = useState(0);
