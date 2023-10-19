@@ -1,3 +1,19 @@
+# How to Start
+
+Clone and run the following commands
+
+- npm install
+- npm run dev
+
+# Disclaimers
+
+The project was tested on Safari and Chrome mostly,
+
+- node version V16.9.0
+- npm version 8.12.1
+
+In the low probability to encounter issues, please modify personal node version with tools like nvm
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
