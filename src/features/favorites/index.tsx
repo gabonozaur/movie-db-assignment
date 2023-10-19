@@ -4,13 +4,17 @@ import Navigation from "../navigation";
 import useFavorites from "./useFavorites";
 
 const Favorites = () => {
-  const { data, fetching } = useFavorites();
+  const { data, fetching, fetchData } = useFavorites();
 
   return (
     <div>
       <Navigation />
       <LoadableWrapper loading={fetching}>
-        <Movies movies={data ?? []} />
+        <Movies
+          movies={data ?? []}
+          removeFromFavorites
+          onChangeFavorite={fetchData}
+        />
       </LoadableWrapper>
     </div>
   );

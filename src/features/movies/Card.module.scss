@@ -7,6 +7,8 @@ img {
 
 .container {
   position: relative;
+  min-width: fit-content;
+  min-height: fit-content;
 }
 
 .title {
@@ -25,4 +27,17 @@ img {
   text-align: center;
   font-size: 18px;
   background-color: white;
+}
+
+.buttonContainer {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: fit-content;
+}
+
+.button {
+  padding: 4px;
+  font-size: 14px;
+  opacity: 0.8;
 }

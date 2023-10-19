@@ -1,19 +1,21 @@
 import { FC } from "react";
 import CardMovies from "./Card";
 import classNames from "./Movies.module.scss";
-import { MovieDTO } from "./types";
+import { MoviesProps } from "./types";
 import useMovies from "./useMovies";
 
-const Movies: FC<{ movies: MovieDTO[] }> = ({ movies }) => {
-  const { changeStatus, idChangingStatus } = useMovies();
+const Movies: FC<MoviesProps> = (props) => {
+  const { changeStatus, idChangingStatus } = useMovies(props);
+  const { movies } = props;
   return (
     <div className={classNames.container}>
       {movies.length ? (
         movies.map((movie) => (
           <CardMovies
+            buttonText={props.removeFromFavorites ? "Remove Fav" : "Add to Fav"}
             loading={idChangingStatus === movie.id}
             onClick={() => {
-              changeStatus(movie.id, true);
+              changeStatus(movie.id);
             }}
             key={movie.id}
             data={movie}

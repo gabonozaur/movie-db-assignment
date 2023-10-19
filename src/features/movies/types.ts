@@ -14,3 +14,9 @@ export interface MovieDTO {
   vote_average: number;
   vote_count: string;
 }
+
+export interface MoviesProps {
+  movies: MovieDTO[];
+  removeFromFavorites?: boolean;
+  onChangeFavorite: () => {};
+}

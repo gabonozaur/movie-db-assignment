@@ -1,11 +1,12 @@
 import { useState } from "react";
 import apiClient from "../../utils/apiClient";
 import { accountId } from "../../utils/constants";
+import { MoviesProps } from "./types";
 
-const useMovies = () => {
+const useMovies = (props: MoviesProps) => {
   const [idChangingStatus, setIdChangingStatus] = useState(0);
 
-  const changeStatus = async (id: number, newStatus: boolean) => {
+  const changeStatus = async (id: number) => {
     if (idChangingStatus) {
       return;
     }
@@ -14,10 +15,12 @@ const useMovies = () => {
       await apiClient.post(`/account/${accountId}/favorite`, {
         media_type: "movie",
         media_id: id,
-        favorite: newStatus,
+        favorite: !props.removeFromFavorites,
       });
-      setIdChangingStatus(0);
+      props.onChangeFavorite?.();
     } catch (e) {}
+
+    setIdChangingStatus(0);
   };
 
   return { changeStatus, idChangingStatus };

@@ -5,7 +5,7 @@ import classNames from "./Home.module.scss";
 import useHome from "./useHome";
 
 const Home = () => {
-  const { data, fetching, input, setInput } = useHome();
+  const { data, fetching, input, setInput, fetchData } = useHome();
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Home = () => {
       />
       <Navigation />
       <LoadableWrapper loading={fetching}>
-        <Movies movies={data ?? []} />
+        <Movies movies={data ?? []} onChangeFavorite={fetchData} />
       </LoadableWrapper>
     </div>
   );

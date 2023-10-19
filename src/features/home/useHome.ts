@@ -39,7 +39,7 @@ const useHome = () => {
     };
   }, [input]);
 
-  return { data, fetching, input, setInput };
+  return { data, fetching, input, setInput, fetchData };
 };
 
 export default useHome;
