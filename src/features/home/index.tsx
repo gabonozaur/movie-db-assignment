@@ -3,6 +3,7 @@ import Movies from "../movies";
 import classNames from "./Home.module.scss";
 import useHome from "./useHome";
 import Navigation from "../navigation";
+import LoadableWrapper from "../common/LoadableWrapper";
 
 const Home = () => {
   const { data, fetching, input, setInput } = useHome();
@@ -25,10 +26,9 @@ const Home = () => {
         }}
       />
       <Navigation />
-      <div className={classNames.containerGrid}>
-        {fetching ? <div className={classNames.loading}>Thinking</div> : null}
+      <LoadableWrapper>
         <Movies movies={data ?? []} />
-      </div>
+      </LoadableWrapper>
     </div>
   );
 };
