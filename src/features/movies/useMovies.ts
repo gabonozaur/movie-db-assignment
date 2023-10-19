@@ -2,9 +2,18 @@ import { useState } from "react";
 import apiClient from "../../utils/apiClient";
 import { accountId } from "../../utils/constants";
 import { MoviesProps } from "./types";
+import { useInView } from "react-intersection-observer";
 
 const useMovies = (props: MoviesProps) => {
   const [idChangingStatus, setIdChangingStatus] = useState(0);
+
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView) {
+        props.onFetchMore?.();
+      }
+    },
+  });
 
   const changeStatus = async (id: number) => {
     if (idChangingStatus) {
@@ -23,7 +32,7 @@ const useMovies = (props: MoviesProps) => {
     setIdChangingStatus(0);
   };
 
-  return { changeStatus, idChangingStatus };
+  return { changeStatus, idChangingStatus, ref };
 };
 
 export default useMovies;

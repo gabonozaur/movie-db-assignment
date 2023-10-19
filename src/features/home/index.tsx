@@ -11,10 +11,12 @@ const Home = () => {
     fetching,
     input,
     setInput,
-    fetchData,
     categories,
     setSelectedCategories,
     selectedCategories,
+    onFetchMore,
+    page,
+    maxPage,
   } = useHome();
 
   return (
@@ -35,7 +37,11 @@ const Home = () => {
       </div>
       <Navigation />
       <LoadableWrapper loading={fetching}>
-        <Movies movies={data ?? []} onChangeFavorite={fetchData} />
+        <Movies
+          hideGetMore={page == maxPage}
+          onFetchMore={onFetchMore}
+          movies={data ?? []}
+        />
       </LoadableWrapper>
     </div>
   );

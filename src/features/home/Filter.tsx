@@ -10,7 +10,6 @@ const Filter: FC<{
 }> = ({ categories, selectedCategories, setSelectedCategories }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("categs", categories);
   return (
     <>
       <button
