@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { imageBaseUrl } from "../../utils/constants";
-import LoadableWrapper from "../common/LoadableWrapper";
+import LoadableWrapper from "../common/LoadableWrapperr";
 import classNames from "./Card.module.scss";
 import { MovieDTO } from "./types";
 
