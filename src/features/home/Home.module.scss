@@ -2,4 +2,15 @@
   border-width: 3px;
   border-style: solid;
   padding: 8px;
+  flex-grow: 1;
+}
+
+.flexContainer {
+  display: flex;
+  gap: 8px;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  z-index: 10;
+  padding-bottom: 8px;
 }

@@ -1,0 +1,24 @@
+.container {
+  background-color: white;
+  z-index: 500;
+  right: 24px;
+  top: 36px;
+  position: fixed;
+  padding: 16px;
+  border-radius: 12px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 80vh;
+}
+
+.button {
+  padding: 4px;
+}
+
+.buttonSelected {
+  @extend .button;
+  background-color: green;
+  color: white;
+}
