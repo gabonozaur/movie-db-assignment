@@ -61,6 +61,9 @@ const useHome = () => {
       onSuccess(res.data.results);
       setPage(selectedPage);
       setMaxPage(res.data.total_pages);
+      if (selectedPage < page) {
+        window.scrollTo(0, 0);
+      }
       setFetching(false);
     } catch (e: any) {
       if (e.message !== abortReason) {

@@ -32,6 +32,9 @@ const useFavorites = () => {
       setPage(selectedPage);
       setMaxPage(res.data.total_pages);
       setFetching(false);
+      if (selectedPage < page) {
+        window.scrollTo(0, 0);
+      }
     } catch (e: any) {
       handleReqError(e);
     }
